@@ -1,0 +1,12 @@
+.DS_Store
+downloads
+build
+dist
+
+benchmarks/log/
+benchmarks/local.properties
+benchmarks/cvs-*
+benchmarks/build
+benchmarks/libs/dacapo-digest/*
+benchmarks/dacapo.jar
+
