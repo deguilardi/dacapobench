@@ -6,7 +6,11 @@ dist
 benchmarks/log/
 benchmarks/local.properties
 benchmarks/cvs-*
+benchmarks/svn-*
 benchmarks/build
 benchmarks/libs/dacapo-digest/*
 benchmarks/dacapo.jar
-
+benchmarks/avrora
+benchmarks/bms/batik/deps
+benchmarks/bms/eclipse/plugin/@dot
+benchmarks/dacapo-*.jar
