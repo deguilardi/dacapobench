@@ -26,13 +26,13 @@ For more information see the [DaCapo Benchmark web page](http://dacapobench.org)
 
 ## Building
 
-* *Install Docker
-* *Configure the Doccker image: `docker build -f Dockerfile -t dacapo .`
-* *Compile DaCapo: `docker container run dacapo /usr/local/benchmarks/ant`
+* Install Docker
+* Configure the Doccker image: `docker build -f Dockerfile -t dacapo .`
+* Compile DaCapo: `docker container run dacapo /usr/local/benchmarks/ant`
 
 
 ## Running
-* *Simply call the banchmarks: `docker container run dacapo java -jar /usr/local/benchmarks/dacapo[...].jar avrora`
+* Simply call the banchmarks: `docker container run dacapo java -jar /usr/local/benchmarks/dacapo[...].jar avrora`
 
 
 ## Customization
