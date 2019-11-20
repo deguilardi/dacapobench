@@ -1,0 +1,11 @@
+.DS_Store
+downloads
+build
+dist
+
+benchmarks/log/
+benchmarks/local.properties
+benchmarks/cvs-*
+benchmarks/svn-*
+benchmarks/build
+benchmarks/scratch/

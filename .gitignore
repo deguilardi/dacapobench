@@ -14,3 +14,4 @@ benchmarks/avrora
 benchmarks/bms/batik/deps
 benchmarks/bms/eclipse/plugin/@dot
 benchmarks/dacapo-*.jar
+benchmarks/scratch/
