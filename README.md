@@ -68,6 +68,9 @@ This directory includes all of the source code for the DaCapo harness, which is 
 Each of these directories more or less mirror the `bm` directories.
 
 
+### To compile agent:
+    docker container run dacapo /usr/local/benchmarks/agent/ant -d -D64bit=true
+
 
 ## License
 

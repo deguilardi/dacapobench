@@ -16,14 +16,24 @@
     <property name="lib-name" value="bcel"/>
 
     <property name="lib-version" value="5.2"/>
-    <property name="lib-url" value="http://apache.wildit.net.au/jakarta/${lib-name}/source"/>
+    <property name="lib-url" value="https://archive.apache.org/dist/jakarta/${lib-name}/source/"/>
     <property name="lib-src" value="${lib-name}-${lib-version}-src.tar.gz"/>
     <property name="lib-jar" value="${lib-name}-${lib-version}.jar"/>
 
     <import file="../common.xml"/>
 
-    <target name="unpack" depends="untar">
-            <patch patchfile="libs/${lib-name}/${lib-name}.patch" dir="${lib-build-dir}" strip="1" ignorewhitespace="yes"/>
+    <!-- this will change the encoding to utf-8 -->
+    <!-- default would be use depends="untar" -->
+    <target name="unpack">
+        <mkdir dir="${lib-build-dir}"/>
+        <untar src="${lib-downloads}/${lib-src}" dest="${lib-build-dir}/original" compression="gzip"/>
+        <copy todir="${lib-build-dir}" overwrite="true"
+            encoding="ISO-8859-1" outputencoding="UTF-8">
+          <fileset dir="${lib-build-dir}/original/">
+            <include name="**/*.*"/>
+          </fileset>
+        </copy>
+        <patch patchfile="libs/${lib-name}/${lib-name}.patch" dir="${lib-build-dir}" strip="1" ignorewhitespace="yes"/>
     </target>
 
     <target name="jar" depends="build">

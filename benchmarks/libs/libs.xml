@@ -108,11 +108,17 @@
     </target>
 
     <!-- asm -->
-    <property name="asm-verison" value="3.3"/>
+    <property name="asm-verison" value="3.3.1"/>
     <property name="asm-jar" value="${lib-base}/asm/dist/jar/asm-${asm-verison}.jar"/>
-    <property name="asm-commons-jar" value="${lib-base}/asm/dist/jar/asm-commons-${asm-verison}.jar"/>
     <target name="asm">
       <ant antfile="${lib-base}/asm/build.xml"/>
+    </target>
+
+    <!-- asm commons -->
+    <property name="asm-commons-verison" value="3.3.1"/>
+    <property name="asm-commons-jar" value="${lib-base}/asm-commons/dist/jar/asm-commons-${asm-commons-verison}.jar"/>
+    <target name="asm-commons">
+      <ant antfile="${lib-base}/asm-commons/build.xml"/>
     </target>
 
 </project>

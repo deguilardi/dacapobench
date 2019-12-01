@@ -31,9 +31,9 @@
     
     <property name="download-dir" value="${agent-dir}/download"/>
     
-    <!-- http://zlib.net/zlib-1.2.5.tar.gz -->
+    <!-- http://zlib.net/zlib-1.2.11.tar.gz -->
     <property name="zlib" value="zlib"/>
-    <property name="zlib-version" value="1.2.5"/>
+    <property name="zlib-version" value="1.2.11"/>
     <property name="zlib-basename" value="${zlib}-${zlib-version}"/>
     <property name="zlib-name" value="${zlib-basename}.tar.gz"/>
     <property name="zlib-url" value="http://${zlib}.net"/>
@@ -81,7 +81,7 @@
     
     <target name="buildzlib" depends="buildzlib32,buildzlib64"/>
     
-    <target name="libs" depends="init,asm,bcel,buildzlib">
+    <target name="libs" depends="init,asm,asm-commons,bcel,buildzlib">
         <copy file="${asm-jar}" todir="${dist-dir}"/>
         <copy file="${asm-commons-jar}" todir="${dist-dir}"/>
         

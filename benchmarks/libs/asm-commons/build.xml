@@ -13,22 +13,17 @@
 
     <property file="ant/dacapo.properties"/>
 
-    <property name="lib-name" value="asm"/>
+    <property name="lib-name" value="asm-commons"/>
 
-    <!-- http://download.forge.objectweb.org/asm/asm-3.3-bin.zip -->
-    <!-- <property name="lib-version" value="3.3"/>
-    <property name="lib-src" value="${lib-name}-${lib-version}-bin.zip"/>
-    <property name="lib-url" value="http://download.forge.objectweb.org/${lib-name}"/>
-    <property name="lib-jar" value="${lib-name}-${lib-version}.jar"/>
-    <property name="lib-commons-jar" value="${lib-name}-commons-${lib-version}.jar"/> -->
-
-    <!-- https://repo1.maven.org/maven2/asm/asm/3.3.1/asm-3.3.1.jar -->
+    <!-- https://repo1.maven.org/maven2/asm/asm-commons/3.3.1/asm-commons-3.3.1.jar -->
     <property name="lib-version" value="3.3.1"/>
     <property name="lib-src" value="${lib-name}-${lib-version}.jar"/>
-    <property name="lib-url" value="https://repo1.maven.org/maven2/${lib-name}/${lib-name}/${lib-version}"/>
+    <property name="lib-url" value="https://repo1.maven.org/maven2/asm/${lib-name}/${lib-version}"/>
     <property name="lib-jar" value="${lib-name}-${lib-version}.jar"/>
-
+    
     <import file="../common.xml"/>
+
+    <mkdir dir="${lib-downloads}"/>
 
     <target name="jar" depends="build">
         <copy file="${lib-downloads}/${lib-src}" tofile="${lib-output-dir}/jar/${lib-jar}" />
@@ -42,11 +37,6 @@
     </target>
 
     <target name="data" depends="build.init">
-        <!-- <unzip src="${lib-downloads}/${lib-src}" dest="${lib-build-dir}">
-            <fileset dir=".">
-                <include name="${lib-name}-${lib-version}/lib/*.jar"/>
-            </fileset>
-        </unzip> -->
     </target>
     
 </project>
