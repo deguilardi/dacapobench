@@ -16,3 +16,9 @@ benchmarks/bms/eclipse/plugin/@dot
 benchmarks/dacapo-*.jar
 benchmarks/scratch/
 benchmarks/agent/download
+benchmarks/agent/*.csv
+benchmarks/agent/working/
+benchmarks/agent/lib/
+benchmarks/agent/dacapo.jar
+benchmarks/${build.target-jar}
+benchmarks/${dist}
