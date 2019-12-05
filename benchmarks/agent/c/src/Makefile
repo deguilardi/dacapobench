@@ -13,7 +13,7 @@ SOURCES=dacapooptions.c dacapoagent.c dacapoexception.c dacapolog.c dacapotag.c 
 	dacapoallocation.c dacapomethod.c dacapocallchain.c 
 
 # Linux GNU C Compiler
-ifeq ($(OSNAME), linux)
+# ifeq ($(OSNAME), linux)
     # GNU Compiler options needed to build it
     COMMON_FLAGS=-fno-strict-aliasing -fPIC -fno-omit-frame-pointer -D_LARGEFILE64_SOURCE=1
     # Options that help find errors
@@ -27,14 +27,16 @@ ifeq ($(OSNAME), linux)
     OBJECTS=$(SOURCES:%.c=%.o)
     # Library name and options needed to build it
     LIBRARY=lib$(LIBNAME).so
-    LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
+#     these tags are not supported on osx
+#     LDFLAGS=-Wl,-soname=$(LIBRARY) -static-libgcc -mimpure-text
+    LDFLAGS=-Wl
     # Libraries we are dependent on
     LIBRARIES=-L $(JAVA_HOME)/jre/lib/$(LIBARCH) -lc
     # LIBRARIES+= -L $(ZLIB_DIR) -l $(ZLIB_LIB)
     OBJECTS+= $(ZLIB_DIR)/lib$(ZLIB_LIB).a 
     # Building a shared library
     LINK_SHARED=$(LINK.c) -shared -o $@
-endif
+# endif
 
 # Common -I options
 CFLAGS += -I. -I$(ZLIB_DIR)
