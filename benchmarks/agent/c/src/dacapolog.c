@@ -27,7 +27,13 @@ MonitorLockType       gcLock;
 #define FILE_TYPE int
 
 #define FILE_IS_CLOSED -1
-#define FILE_FLAGS      (O_WRONLY | O_CREAT | O_LARGEFILE )
+
+#ifdef O_LARGEFILE
+	#define FILE_FLAGS      (O_WRONLY | O_CREAT | O_LARGEFILE)
+#else
+	#define FILE_FLAGS      (O_WRONLY | O_CREAT)
+#endif
+
 #define FILE_MODE       (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP)
 #define GZ_FILE_MODE   "w"
 #define GZ_BUFFER_SIZE (128*1024)
@@ -38,7 +44,7 @@ gzFile                 gzLogFile;
 
 jboolean			gzLog = FALSE;
 
-jboolean			logState = FALSE;
+jboolean			logState = TRUE;
 jboolean            localInitDone = FALSE;
 struct timeval      startTime;
 jclass              log_java_class = NULL;
