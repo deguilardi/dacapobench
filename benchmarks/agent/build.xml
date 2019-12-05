@@ -14,20 +14,9 @@
     
     <property name="agent-dir" value="${basedir}/agent"/>
     <property name="dist-dir" value="${agent-dir}/dist"/>
+    <property name="build-dir" value="${agent-dir}/build"/>
     
     <property file="dacapo.properties"/>
-
-    <condition property="linux">
-        <equals arg1="${os.name}" arg2="linux" casesensitive="no" trim="yes"/>
-    </condition>
-
-    <condition property="32bit">
-        <equals arg1="${os.name}" arg2="32" casesensitive="no" trim="yes"/>
-    </condition>
-    
-    <condition property="64bit">
-        <equals arg1="${os.name}" arg2="64" casesensitive="no" trim="yes"/>
-    </condition>
     
     <property name="download-dir" value="${agent-dir}/download"/>
     
@@ -46,8 +35,6 @@
     <property name="cli-name" value="${cli-basename}-bin.tar.gz"/>
     <property name="cli-url" value="${apache.dl.url}/commons/cli/binaries"/>
 
-    <property name="make" value="make"/>
-
     <target name="init">
         <mkdir dir="${agent-dir}/build"/>
         <mkdir dir="${agent-dir}/lib"/>
@@ -61,7 +48,7 @@
             <param name="target-url"  value="${zlib-url}"/>
         </antcall>
         <untar src="${download-dir}/${zlib-name}" dest="${agent-dir}/build" compression="gzip"/>
-    <patch patchfile="${agent-dir}/${zlib}.patch" dir="${agent-dir}/build" strip="1" ignorewhitespace="yes"/>
+        <patch patchfile="${agent-dir}/${zlib}.patch" dir="${agent-dir}/build" strip="1" ignorewhitespace="yes"/>
     </target>
     
     <target name="buildzlib32" depends="init,zlibsrc" unless="64bit">
@@ -96,15 +83,32 @@
         <copy file="${build-dir}/${cli-basename}/${cli-basename}.jar" todir="${dist-dir}"/>
     </target>
     
-    <target name="all" depends="init,libs,jar,build-agent-linux">
+    <target name="all" depends="init,libs,jar,build-agent">
     </target>
         
     <target name="jar">
         <javac debug="on" srcdir="${agent-dir}/src" destdir="${agent-dir}/src" classpath="${asm-jar}:${asm-commons-jar}" />
-        <jar destfile="${agent-dir}/dist/agent.jar" basedir="${agent-dir}/src" />
+
+        <!-- Remove manifest. This jar will end up on the classpath of CC.jar -->
+        <jar jarfile="${agent-dir}/dist/agent.jar" basedir="${agent-dir}/src"/>
+
+        <!-- Fancy task that takes the pain out creating properly formatted manifest value -->
+        <manifestclasspath property="mf.classpath" jarfile="${agent-dir}/dist/agent.jar">
+            <classpath>
+                <fileset dir="${agent-dir}/dist" includes="*.jar"/>
+            </classpath>
+        </manifestclasspath>
+
+        <!-- This is the executable jar -->
+        <jar jarfile="${agent-dir}/dist/agent.jar" basedir="${agent-dir}/src">
+            <manifest>
+                <attribute name="Main-Class" value="org.dacapo.instrument.Instrument"/>
+                <attribute name="Class-Path" value="${mf.classpath}"/> 
+            </manifest>
+        </jar>
     </target>
     
-    <target name="build-agent-linux" if="linux">
+    <target name="build-agent">
         <mkdir dir="${agent-dir}/build/agent" />
         <copy todir="${agent-dir}/build/agent" >
             <fileset dir="${agent-dir}/c/src">
@@ -113,10 +117,9 @@
                 <include name="Makefile"/>
             </fileset>
         </copy>
-        <exec executable="${make}" dir="${agent-dir}/build/agent">
+        <exec executable="make" dir="${agent-dir}/build/agent">
             <arg value="JAVA_HOME=${java.home}/.."/>
-            <arg value="OSNAME=linux"/>
-            <!-- <arg value="OPT=true"/> -->
+            <arg value="ARCH=${arch}"/>
             <arg value="ZLIB_DIR=${agent-dir}/build/${zlib-basename}"/> 
             <arg value="ZLIB_LIB=${zlib-lib-base}"/>
         </exec>
@@ -127,16 +130,13 @@
         </copy>
     </target>
 
-    <target name="clean" depends="clean-linux">
+    <target name="clean">
         <delete dir="${dist-dir}"/>
         <delete dir="${agent-dir}/lib"/>
         <delete dir="${agent-dir}/build"/>
-    </target>
-    
-    <target name="clean-linux" if="linux">
-        <exec executable="${make}" dir="agent">
+        <exec executable="make" dir="agent">
             <arg value="JAVA_HOME=${java.home}"/>
-            <arg value="OSNAME=linux"/>
+            <arg value="ARCH=${arch}"/>
             <arg value="clean"/>
         </exec>
     </target>
