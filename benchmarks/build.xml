@@ -253,7 +253,7 @@ BUILDING:
          ================================= -->
     <target name="bootstrap" depends="init">
     	<!-- construct the bootstrap -->
-        <javac srcdir="${dacapo.src.dir}" destdir="${dacapo.build.dir}"/>
+        <javac srcdir="${dacapo.src.dir}" destdir="${dacapo.build.dir}" includeantruntime="false" />
 
     	<!-- set the manifest for the jar -->
         <copy file="${dacapo.src.dir}/META-INF/MANIFEST.MF" todir="${dacapo.build.dir}"/>
@@ -369,7 +369,7 @@ See ${log.build.report} for a summary of benchmark build status.
                 <arg value="incremental"/>
             </exec>
             <condition property="@{benchmark}.failed">
-                <isfailure code="${@{benchmark}-status}"/>
+            	<isfailure code="${@{benchmark}-status}"/>
             </condition>
             <condition property="@{benchmark}.message" value="FAIL" else="PASS">
                 <isset property="@{benchmark}.failed"/>

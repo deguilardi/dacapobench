@@ -13,7 +13,7 @@ SOURCES=dacapooptions.c dacapoagent.c dacapoexception.c dacapolog.c dacapotag.c 
 	dacapoallocation.c dacapomethod.c dacapocallchain.c 
 
 # Linux GNU C Compiler
-# ifeq ($(OSNAME), linux)
+# ifeq ($(ARCH), linux)
     # GNU Compiler options needed to build it
     COMMON_FLAGS=-fno-strict-aliasing -fPIC -fno-omit-frame-pointer -D_LARGEFILE64_SOURCE=1
     # Options that help find errors
@@ -40,7 +40,7 @@ SOURCES=dacapooptions.c dacapoagent.c dacapoexception.c dacapolog.c dacapotag.c 
 
 # Common -I options
 CFLAGS += -I. -I$(ZLIB_DIR)
-CFLAGS += -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/$(OSNAME)
+CFLAGS += -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/$(ARCH)
 
 # Default rule (build both native library and jar file)
 all: $(LIBRARY)
