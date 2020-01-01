@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.jar.JarFile;
 import java.util.List;
 
-import ca.uqac.transformers.*;
-
 class UqacAgent{
 
 	private static String TAG = "UqacAgent";
