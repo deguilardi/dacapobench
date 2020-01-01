@@ -29,6 +29,7 @@ For more information see the [DaCapo Benchmark web page](http://dacapobench.org)
 * Install Docker
 * Configure the Doccker image: `docker build -f Dockerfile -t dacapo .`
 * Compile DaCapo: `docker container run dacapo /usr/local/benchmarks/ant`
+* Iterative mode: `docker container rn -i dacapo /bin/bash`
 
 
 ## Running
@@ -68,8 +69,9 @@ This directory includes all of the source code for the DaCapo harness, which is 
 Each of these directories more or less mirror the `bm` directories.
 
 
-### To compile agent:
-    docker container run dacapo /usr/local/benchmarks/agent/ant -d -D64bit=true
+### Using the agent:
+    docker container run dacapo /usr/local/benchmarks/agent/ant -d [-D64bit=true] -Darch=[darwin,win32,linux]
+    docker container run dacapo /usr/local/benchmarks/agent/run [avrora]
 
 
 ## License
