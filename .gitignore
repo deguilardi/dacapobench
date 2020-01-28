@@ -2,6 +2,7 @@
 downloads
 build
 dist
+bin
 
 benchmarks/log/
 benchmarks/local.properties
@@ -20,5 +21,11 @@ benchmarks/agent/*.csv
 benchmarks/agent/working/
 benchmarks/agent/lib/
 benchmarks/agent/dacapo.jar
+benchmarks/agent/src/org/dacapo/**/*.class
 benchmarks/${build.target-jar}
 benchmarks/${dist}
+
+benchmarks/agent_uqac/*.log
+benchmarks/agent_uqac/*.jar
+benchmarks/agent_uqac/build
+benchmarks/agent_uqac/scratch

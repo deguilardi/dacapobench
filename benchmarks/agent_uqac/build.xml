@@ -1,0 +1,31 @@
+<project name="UqacAgent" basedir="." default="main" >
+    
+	<target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false" >
+             <classpath>
+                <pathelement path="../../tools/javassist-3.26/javassist.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar">
+        <jar jarfile="uqacAgent.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Agent-Class" value="ca.uqac.UqacAgent" />
+                <attribute name="Premain-Class" value="ca.uqac.UqacAgent" />
+                <attribute name="Can-Redefine-Classes" value="true" />
+                <attribute name="Can-Retransform-Classes" value="true" />
+                <attribute name="Class-Path" value="build/classes ../../tools/javassist-3.26/javassist.jar" /> 
+            </manifest>
+            <fileset dir="../../tools/javassist-3.26" includes="*.jar" />
+        </jar>
+    </target>
+
+    <target name="main" depends="clean,compile,jar"/>
+
+</project>
