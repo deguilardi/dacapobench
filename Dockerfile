@@ -52,7 +52,10 @@ COPY ./benchmarks/docker.properties /usr/local/benchmarks/local.properties
 COPY ./LICENSE /usr/local/LICENSE
 COPY ./README.md /usr/local/README.md
 COPY ./.gitlab-ci.yml /usr/local/.gitlab-ci.yml
-
+COPY ./Dockerfile /usr/local/Dockerfile
+COPY ./.git /usr/local/.git
+COPY ./.gitignore /usr/local/.gitignore
+COPY ./.dockerignore /usr/local/.dockerignore
 
 
 ##################################################

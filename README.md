@@ -29,6 +29,7 @@ For more information see the [DaCapo Benchmark web page](http://dacapobench.org)
 * Install Docker
 * Configure the Doccker image: `docker build -f Dockerfile -t dacapo .`
 * Compile DaCapo: `docker container run dacapo /usr/local/benchmarks/ant`
+* Iterative mode: `docker container rn -i dacapo /bin/bash`
 
 
 ## Running
