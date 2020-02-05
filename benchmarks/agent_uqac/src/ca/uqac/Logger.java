@@ -6,7 +6,7 @@ public abstract class Logger{
 	public static String DEBUG = "debug";
 	public static String ERROR = "error";
 
-	private static String currentLevel = DEBUG;
+	private static String currentLevel = INFO;
 
 	public static void log( String tag, String level, String message ){
 		if( checkLevel( level ) ){
