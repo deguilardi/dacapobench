@@ -16,7 +16,14 @@ public abstract class Logger{
 	}
 
 	public static String format( String tag, String level, String message ){
-		return "[" + tag + "][" + level + "] " + message;
+		StringBuffer sb = new StringBuffer();
+		sb.append( "[" );
+		sb.append( tag );
+		sb.append( "][" );
+		sb.append( level );
+		sb.append( "] " );
+		sb.append( message );
+		return sb.toString();
 	}
 
 	private static boolean checkLevel( String level ){
