@@ -250,7 +250,7 @@ public class Transformer implements ClassFileTransformer {
 
             // log params
             String[] params = methodToTrace.params;
-            if( params.length > 0 ){
+            if( params != null && params.length > 0 ){
                 for( String param: params ){
                     sb.append( "System.out.println(\"               [call][info][param] name:" );
                     sb.append( param );
